@@ -1,0 +1,9 @@
+{
+  "gameTitle": "Berzerk",
+  "gameReleaseYear": "1980",
+  "gameDeveloper": "Stern Electronics, Inc.",
+  "gameSeries": null,
+  "console": {"consoleId":1, "consoleName":"2600", "consoleGeneration":"2", "consoleManufacturer":"Atari"},
+  "genre": {"genreId":1, "genreName":"Top-Down Shooter", "genreType":"Action"},
+  "review": {"reviewId":1, "reviewScore":7, "reviewText":"This was the first game that instilled a sense of dread in me. The game is a simple top-down shooter where you have to kill a number of enemies in a room, but if you touch the walls BZZZT you dead. If the enemies shoot you BZZT you dead. And if you stay in a room too long... well, for your sake, do not stay in a room too long."}
+}
