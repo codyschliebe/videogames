@@ -23,7 +23,7 @@ public class Review {
 	private String reviewText;
 
 	//define relationship with game table
-	@OneToOne//(mappedBy = "review")
+	@OneToOne
 	@JoinColumn(name = "game_id")
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude

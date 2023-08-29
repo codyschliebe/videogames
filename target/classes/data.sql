@@ -118,10 +118,16 @@ INSERT INTO genre (genre_name, genre_type)
 VALUES("3rd-Person Adventure", "Adventure");
 
 INSERT INTO genre (genre_name, genre_type)
-VALUES("Tactical Stealth Shooter", "Shooter");
+VALUES("Tactical Stealth", "Action");
 
 INSERT INTO genre (genre_name, genre_type)
 VALUES("Puzzle Platformer", "Puzzle");
+
+INSERT INTO genre (genre_name, genre_type)
+VALUES("3rd Person Shooter", "Shooter");
+
+INSERT INTO genre (genre_name, genre_type)
+VALUES("Multiplayer Arena Shooter", "Shooter");
 
 
 INSERT INTO game_genre (game_id, genre_id)
@@ -140,6 +146,9 @@ INSERT INTO game_genre (game_id, genre_id)
 VALUES (5, 5);
 
 INSERT INTO game_genre (game_id, genre_id)
+VALUES (5, 10);
+
+INSERT INTO game_genre (game_id, genre_id)
 VALUES (6, 4);
 
 INSERT INTO game_genre (game_id, genre_id)
@@ -150,6 +159,9 @@ VALUES (8, 3);
 
 INSERT INTO game_genre (game_id, genre_id)
 VALUES (9, 7);
+
+INSERT INTO game_genre (game_id, genre_id)
+VALUES (9, 9);
 
 INSERT INTO game_genre (game_id, genre_id)
 VALUES (10, 8);

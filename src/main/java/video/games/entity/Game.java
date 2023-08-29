@@ -25,7 +25,7 @@ public class Game {
 	// Declare variables
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+
 	@Column(name = "game_id")
 	private Long gameId;
 	private String gameTitle;
@@ -33,26 +33,29 @@ public class Game {
 	private String gameDeveloper;
 	private String gameSeries;
 
-	//defining relationship with genre table
+	// defining relationship with genre table
 	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "game_genre", 
-		joinColumns = @JoinColumn(name = "game_id"), 
-		inverseJoinColumns = @JoinColumn(name = "genre_id"))
+	@JoinTable(name = "game_genre", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	private Set<Genre> genres = new HashSet<>();
-	
-	//defining relationship with console table
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "console_id")
+
+	// defining relationship with console table
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "console_id", nullable = false)
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	private Console console;
-	
-	//defining relationship with review table
-	@OneToOne(mappedBy = "game",cascade = CascadeType.ALL)
+
+	// defining relationship with review table
+	@OneToOne(mappedBy = "game", cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	private Review review;
+
+	public Long getConsoleId(Console console) {
+		Long consoleId = console.getConsoleId();
+		return consoleId;
+	}
 }

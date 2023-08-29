@@ -37,6 +37,8 @@ public class GameService {
 	
 	@Autowired
 	private ReviewDao reviewDao;
+	
+	//***************************Save Game**********************************
 
 	@Transactional(readOnly = false)
 	public GameData saveGame(GameData gameData) {
@@ -282,21 +284,25 @@ public class GameService {
 	
 	//***************************LIST BY CONSOLE********************************
 	
-	public List<GameData> retrieveAllGamesByConsole(Long consoleId) {
-		Game game = findGamebyConsoleId(consoleId);
-		GameData gameData = new GameData(game);
-		
-		private List<GameData> findGameByConsoleId(Long consoleId) {
-			List<Game> listGames = gameDao.findAll();
-			List<GameData> listGameData;
-			for (Game game : listGames) {
-				if (game.getConsoleId() == consoleId) {
-					listGames.add(game);
-				}
-			}
-			return listGameData;
-		}
-	}
+//	public List<GameData> retrieveAllGamesByConsole(Long consoleId) {
+//		List<Game> listGames = findGameByConsoleId(consoleId);
+//		
+//		
+//		List<GameData> gamesData = new List<GameData>(game);
+//		
+//
+//		
+//	}
+//	
+//	private List<Game> findGameByConsoleId(Long consoleId) {
+//		List<Game> listGames = gameDao.findAll();
+//		for (Game game : listGames) {
+//			if (game.getConsoleId() == consoleId) {
+//				listGames.add(game);
+//			}
+//		}
+//		return listGames;
+//	}
 
 	//*****************************DELETE BY ID**********************************
 	public void deleteGameById(Long gameId) {
