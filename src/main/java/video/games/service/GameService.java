@@ -1,5 +1,6 @@
 package video.games.service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -266,20 +267,43 @@ public class GameService {
 	}
 	
 	//****************************LIST BY GENREID********************************
-//	public List<GameData> retrieveAllGamesByGenreName(String genreName) {
-//		Game game = findGameByGenre(genreName);
-//	GameData gameData = new GameData(game);
-//		
-//	}
-//	
-//	private Game findGameByGenre(String genreName) {
-//		List<Game> listGames = gameDao.findAll();
-//		List<GameData> listGameData;
-//		for(Game game : listGames) {
-//			if (game)
-//		}
-//		if (listGames.getGenre)
-//		return null;
+	
+	public Genre retrieveGenreByName(String genreName) {
+		List<Genre> listGenres = genreDao.findAll();
+		Genre returnGenre = new Genre();
+			for (Genre genre : listGenres) {
+				if (genre.getGenreName().equals(genreName)) {
+					returnGenre = genre;
+				} 
+			}
+		return returnGenre;
+	}
+	
+	public List<GameData> retrieveAllGamesByGenre(Genre genre) {
+		List<Game> listGames = gameDao.findAll();
+		List<GameData> listGameData = new ArrayList<GameData>();
+		for(Game game : listGames) {
+			if (game.getGenres().contains(genre)) {
+				
+				GameData newGameData = new GameData(game);
+						
+				listGameData.add(newGameData);
+			} else {
+				throw new NoSuchElementException("Game with genre name " + genre.getGenreName() + " not found.");
+			}
+		}
+		return listGameData;
+	}
+	
+	
+	
+	
+//	private void copyGameDataFields(GameData gameData, Game game) {
+//		gameData.setGameId(game.getGameId());
+//		gameData.setGameTitle(game.getGameTitle());
+//		gameData.setGameReleaseYear(game.getGameReleaseYear());
+//		gameData.setGameDeveloper(game.getGameDeveloper());
+//		gameData.setGameSeries(game.getGameSeries());
 //	}
 	
 	//***************************LIST BY CONSOLE********************************

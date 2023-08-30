@@ -20,7 +20,10 @@ import video.games.controller.model.GameData;
 import video.games.controller.model.GameData.GameConsole;
 import video.games.controller.model.GameData.GameGenre;
 import video.games.controller.model.GameData.GameReview;
+import video.games.entity.Genre;
 import video.games.service.GameService;
+
+
 
 @RestController
 @RequestMapping("/video_games")
@@ -28,6 +31,9 @@ import video.games.service.GameService;
 public class GameController {
 	@Autowired
 	private GameService gameService;
+	
+//	@Autowired
+//	private GenreDao genreDao;
 	
 	//********************* Create New Game ***************************
 	@PostMapping
@@ -99,12 +105,14 @@ public class GameController {
 		}
 	
 	//******************List All Games by Genre***************************
-//	@GetMapping("/{genreName}")
-//	@ResponseStatus(code = HttpStatus.ACCEPTED)
-//	public List<GameData> gameListByGenre(@PathVariable String genreName) {
-//		log.info("Retrieving all games of genre " + genreId + "...");
-//		return gameService.retrieveAllGamesByGenreName(genreName);
-//	}
+	@GetMapping("/genre/{genreName}")
+	@ResponseStatus(code = HttpStatus.ACCEPTED)
+	public List<GameData> gameListByGenre(@PathVariable String genreName) {
+		log.info("Retrieving all games of genre " + genreName + "...");
+		//List<Genre> genreList = genreDao.findAll();
+		Genre retrievedGenre = gameService.retrieveGenreByName(genreName);
+		return gameService.retrieveAllGamesByGenre(retrievedGenre);
+	}
 	
 	//*************************Retrieve Game By ID***********************
 	@GetMapping("/{gameId}")
