@@ -36,11 +36,10 @@ public class GameData {
 			genres.add(new GameGenre(genre));
 		}
 		
-		
 
 		genres = getGenres();
-		console = getConsole();
-		review = getReview();
+		console = new GameConsole(game.getConsole());
+		review = new GameReview(game.getReview());
 	}
 
 	@Data
@@ -50,9 +49,6 @@ public class GameData {
 		private String consoleName;
 		private String consoleGeneration;
 		private String consoleManufacturer;
-		private Set<Game> games = new HashSet<>();
-		
-		
 
 		public GameConsole(Console console) {
 			consoleId = console.getConsoleId();
@@ -60,12 +56,7 @@ public class GameData {
 			consoleGeneration = console.getConsoleGeneration();
 			consoleManufacturer = console.getConsoleManufacturer();
 			
-			for (Game game : console.getGames()) {
-				this.games.add(game);
-			}
 		}
-		
-		//games = getGames();
 	}
 
 	@Data
@@ -75,14 +66,14 @@ public class GameData {
 		private Integer reviewScore;
 		private String reviewText;
 		private Long gameId;
-		private Game game;
+		//private Game game;
 
 		public GameReview(Review review) {
 			reviewId = review.getReviewId();
 			reviewScore = review.getReviewScore();
 			reviewText = review.getReviewText();
-			gameId = getGameId();
-			game = review.getGame();
+			gameId = review.getGame().getGameId();
+			//game = review.getGame();
 		}
 
 	}

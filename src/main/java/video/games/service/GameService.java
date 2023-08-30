@@ -219,9 +219,9 @@ public class GameService {
 		for (Game game : listGame) {
 			GameData gameData = new GameData(game);
 			
-			//gameData.getConsole().clear();
+			//gameData.getConsole();
 			//gameData.getGenres().clear();
-			//gameData.getReview().clear();
+			//gameData.getReview();
 			
 			listGameData.add(gameData);
 		}

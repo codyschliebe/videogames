@@ -12,9 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -41,15 +39,15 @@ public class Game {
 	private Set<Genre> genres = new HashSet<>();
 
 	// defining relationship with console table
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "console_id", nullable = false)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "console_id")
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	private Console console;
 
 	// defining relationship with review table
-	@OneToOne(mappedBy = "game", cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "game_id")
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	private Review review;
