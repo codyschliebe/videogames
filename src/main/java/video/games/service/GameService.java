@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.extern.slf4j.Slf4j;
 import video.games.controller.model.GameData;
 import video.games.controller.model.GameData.GameConsole;
 import video.games.controller.model.GameData.GameGenre;
@@ -25,6 +26,7 @@ import video.games.entity.Genre;
 import video.games.entity.Review;
 
 @Service
+@Slf4j
 public class GameService {
 	
 	@Autowired
@@ -266,9 +268,10 @@ public class GameService {
 		return gameData;
 	}
 	
-	//****************************LIST BY GENREID********************************
+	//****************************LIST BY GENRENAME********************************
 	
 	public Genre retrieveGenreByName(String genreName) {
+		log.info("Retrieving Genre with name=" + genreName + "...");
 		List<Genre> listGenres = genreDao.findAll();
 		Genre returnGenre = new Genre();
 			for (Genre genre : listGenres) {
@@ -280,43 +283,48 @@ public class GameService {
 	}
 	
 	public List<GameData> retrieveAllGamesByGenre(Genre genre) {
-		List<Game> listGames = gameDao.findAll();
-		List<GameData> listGameData = new ArrayList<GameData>();
-		for(Game game : listGames) {
-			if (game.getGenres().contains(genre)) {
-				
+		log.info("Retrieving all games of genre " + genre.getGenreName() + "...");
+		List<Game> listGames = gameDao.findAll();	//pull all games into list
+		List<GameData> listGameData = new ArrayList<GameData>();	//create new array to store list of game DTOs
+		for(Game game : listGames) {	//iterate through list of games
+			if (game.getGenres().contains(genre)) {		//find if genre associated with game matches genre from 
+				//build DTO from found game
 				GameData newGameData = new GameData(game);
-						
+				//add DTO to list of game DTOs		
 				listGameData.add(newGameData);
-			} else {
-				throw new NoSuchElementException("Game with genre name " + genre.getGenreName() + " not found.");
-			}
+			} 
 		}
 		return listGameData;
 	}
 	
+	//***************************LIST BY CONSOLE NAME****************************
 	
+	//find console object from PathVariable consoleName
+	public Console retrieveConsoleByName(String consoleName) {
+		log.info("Retrieving Console with name=" + consoleName + "...");
+		List<Console> listConsoles = consoleDao.findAll();
+		Console returnConsole = new Console();
+			for (Console console : listConsoles) {
+				if (console.getConsoleName().equals(consoleName)) {
+					returnConsole = console;
+				}
+			}
+		return returnConsole;
+	}
 	
-	
-//	private void copyGameDataFields(GameData gameData, Game game) {
-//		gameData.setGameId(game.getGameId());
-//		gameData.setGameTitle(game.getGameTitle());
-//		gameData.setGameReleaseYear(game.getGameReleaseYear());
-//		gameData.setGameDeveloper(game.getGameDeveloper());
-//		gameData.setGameSeries(game.getGameSeries());
-//	}
-	
-	//***************************LIST BY CONSOLE********************************
-	
-//	public List<GameData> retrieveAllGamesByConsole(Long consoleId) {
-//		List<Game> listGames = findGameByConsoleId(consoleId);
-//		
-//		
-//		List<GameData> gamesData = new List<GameData>(game);
-//		
-//
-//		
-//	}
+	//retrieve games matching console
+	public List<GameData> retrieveAllGamesByConsole(Console console) {
+		log.info("Retrieving all games on console " + console.getConsoleName() + "...");
+		List<Game> listGames = gameDao.findAll();
+		List<GameData> listGameData = new ArrayList<GameData>();
+		for (Game game : listGames) {
+			if (game.getConsole().equals(console)) {
+				GameData newGameData = new GameData(game);
+				listGameData.add(newGameData);
+			}
+		}
+		return listGameData;
+	}
 //	
 //	private List<Game> findGameByConsoleId(Long consoleId) {
 //		List<Game> listGames = gameDao.findAll();

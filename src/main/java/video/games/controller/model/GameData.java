@@ -30,7 +30,7 @@ public class GameData {
 		gameReleaseYear = game.getGameReleaseYear();
 		gameDeveloper = game.getGameDeveloper();
 		gameSeries = game.getGameSeries();
-		//consoleId = console.getConsoleId();
+		//consoleId = game.getConsoleId();
 
 		for (Genre genre : game.getGenres()) {
 			genres.add(new GameGenre(genre));
@@ -38,8 +38,12 @@ public class GameData {
 		
 
 		genres = getGenres();
-		console = new GameConsole(game.getConsole());
-		review = new GameReview(game.getReview());
+		if (game.getConsole() != null) {
+			console = new GameConsole(game.getConsole());
+		}
+		if (game.getReview() != null) {
+			review = new GameReview(game.getReview());
+		}
 	}
 
 	@Data
@@ -55,6 +59,10 @@ public class GameData {
 			consoleName = console.getConsoleName();
 			consoleGeneration = console.getConsoleGeneration();
 			consoleManufacturer = console.getConsoleManufacturer();
+			
+//			for (Game game : console.getGames()) {
+//				games.add(new GameData(game));
+//			}
 			
 		}
 	}
@@ -84,11 +92,16 @@ public class GameData {
 		private Long genreId;
 		private String genreName;
 		private String genreType;
-
+		//private Set<GameData> games = new HashSet<>();
+		
 		public GameGenre(Genre genre) {
 			genreId = genre.getGenreId();
 			genreName = genre.getGenreName();
 			genreType = genre.getGenreType();
+			
+			//for (Game game : genre.getGames()) {
+			//	games.add(new GameData(game));
+			//}
 		}
 	}
 }

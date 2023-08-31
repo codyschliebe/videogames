@@ -20,6 +20,7 @@ import video.games.controller.model.GameData;
 import video.games.controller.model.GameData.GameConsole;
 import video.games.controller.model.GameData.GameGenre;
 import video.games.controller.model.GameData.GameReview;
+import video.games.entity.Console;
 import video.games.entity.Genre;
 import video.games.service.GameService;
 
@@ -41,7 +42,8 @@ public class GameController {
 	public GameData postGame(@RequestBody GameData gameData) {
 		log.info("Creating new game {}", gameData);
 		gameData = gameService.saveGame(gameData);
-		return gameService.saveGame(gameData);
+		//return gameService.saveGame(gameData);
+		return gameData;
 	}
 	
 	//******************* Modify Existing Game ************************
@@ -111,7 +113,18 @@ public class GameController {
 		log.info("Retrieving all games of genre " + genreName + "...");
 		//List<Genre> genreList = genreDao.findAll();
 		Genre retrievedGenre = gameService.retrieveGenreByName(genreName);
+		//GameGenre gameGenre = new GameGenre(retrievedGenre);
+		//log.info("Plugging " + gameGenre + " into retrieveAllGamesByGenre method...");
 		return gameService.retrieveAllGamesByGenre(retrievedGenre);
+	}
+	
+	//******************List All Games by Console***************************
+	@GetMapping("/console/{consoleName}")
+	@ResponseStatus(code = HttpStatus.ACCEPTED)
+	public List<GameData> gameListByConsole(@PathVariable String consoleName) {
+		log.info("Retrieving all games on console " + consoleName + "...");
+		Console retrievedConsole = gameService.retrieveConsoleByName(consoleName);
+		return gameService.retrieveAllGamesByConsole(retrievedConsole);
 	}
 	
 	//*************************Retrieve Game By ID***********************

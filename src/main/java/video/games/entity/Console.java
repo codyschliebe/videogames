@@ -24,7 +24,7 @@ public class Console {
 	private String consoleGeneration;
 	private String consoleManufacturer;
 	
-	@OneToMany(mappedBy = "console", cascade = CascadeType.ALL,
+	@OneToMany(mappedBy = "console", cascade = CascadeType.PERSIST,
 			orphanRemoval = false)
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude

@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,6 +31,7 @@ public class Game {
 	private String gameReleaseYear;
 	private String gameDeveloper;
 	private String gameSeries;
+	//private Long consoleId;
 
 	// defining relationship with genre table
 	@ManyToMany(cascade = CascadeType.PERSIST)
@@ -39,7 +41,7 @@ public class Game {
 	private Set<Genre> genres = new HashSet<>();
 
 	// defining relationship with console table
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "console_id")
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
@@ -52,8 +54,8 @@ public class Game {
 	@ToString.Exclude
 	private Review review;
 
-	public Long getConsoleId(Console console) {
-		Long consoleId = console.getConsoleId();
-		return consoleId;
-	}
+//	public Long getConsoleId(Console console) {
+//		Long consoleId = console.getConsoleId();
+//		return consoleId;
+//	}
 }
