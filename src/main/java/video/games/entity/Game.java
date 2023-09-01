@@ -48,8 +48,8 @@ public class Game {
 	private Console console;
 
 	// defining relationship with review table
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "game_id")
+	@OneToOne(mappedBy = "game", cascade = CascadeType.ALL)
+	//@JoinColumn(name = "game_id")
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	private Review review;

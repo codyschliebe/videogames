@@ -1,5 +1,6 @@
 package video.games.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class Review {
 	private String reviewText;
 
 	//define relationship with game table
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "game_id")
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude

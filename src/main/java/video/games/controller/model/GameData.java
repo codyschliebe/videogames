@@ -19,7 +19,6 @@ public class GameData {
 	private String gameReleaseYear;
 	private String gameDeveloper;
 	private String gameSeries;
-	//private Long consoleId;
 	private Set<GameGenre> genres = new HashSet<>();
 	private GameConsole console;
 	private GameReview review;
@@ -30,14 +29,14 @@ public class GameData {
 		gameReleaseYear = game.getGameReleaseYear();
 		gameDeveloper = game.getGameDeveloper();
 		gameSeries = game.getGameSeries();
-		//consoleId = game.getConsoleId();
 
 		for (Genre genre : game.getGenres()) {
 			genres.add(new GameGenre(genre));
 		}
-		
 
 		genres = getGenres();
+		
+		//allow GameData creation with null console and review
 		if (game.getConsole() != null) {
 			console = new GameConsole(game.getConsole());
 		}
@@ -59,11 +58,7 @@ public class GameData {
 			consoleName = console.getConsoleName();
 			consoleGeneration = console.getConsoleGeneration();
 			consoleManufacturer = console.getConsoleManufacturer();
-			
-//			for (Game game : console.getGames()) {
-//				games.add(new GameData(game));
-//			}
-			
+
 		}
 	}
 
@@ -74,14 +69,14 @@ public class GameData {
 		private Integer reviewScore;
 		private String reviewText;
 		private Long gameId;
-		//private Game game;
+		// private Game game;
 
 		public GameReview(Review review) {
 			reviewId = review.getReviewId();
 			reviewScore = review.getReviewScore();
 			reviewText = review.getReviewText();
 			gameId = review.getGame().getGameId();
-			//game = review.getGame();
+			// game = review.getGame();
 		}
 
 	}
@@ -92,16 +87,16 @@ public class GameData {
 		private Long genreId;
 		private String genreName;
 		private String genreType;
-		//private Set<GameData> games = new HashSet<>();
-		
+		// private Set<GameData> games = new HashSet<>();
+
 		public GameGenre(Genre genre) {
 			genreId = genre.getGenreId();
 			genreName = genre.getGenreName();
 			genreType = genre.getGenreType();
-			
-			//for (Game game : genre.getGames()) {
-			//	games.add(new GameData(game));
-			//}
+
+			// for (Game game : genre.getGames()) {
+			// games.add(new GameData(game));
+			// }
 		}
 	}
 }

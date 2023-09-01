@@ -60,8 +60,8 @@ public class GameController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public GameConsole saveGameConsole(@PathVariable Long gameId, 
 			@RequestBody GameConsole gameConsole) {
-		log.info("Creating console...");
-		return gameService.saveConsole(gameId,  gameConsole);
+		log.info("Creating console..." + gameConsole);
+		return gameService.saveConsole(gameId, gameConsole);
 	}
 	
 	//*********************Create New Genre******************************
@@ -111,10 +111,7 @@ public class GameController {
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	public List<GameData> gameListByGenre(@PathVariable String genreName) {
 		log.info("Retrieving all games of genre " + genreName + "...");
-		//List<Genre> genreList = genreDao.findAll();
 		Genre retrievedGenre = gameService.retrieveGenreByName(genreName);
-		//GameGenre gameGenre = new GameGenre(retrievedGenre);
-		//log.info("Plugging " + gameGenre + " into retrieveAllGamesByGenre method...");
 		return gameService.retrieveAllGamesByGenre(retrievedGenre);
 	}
 	
